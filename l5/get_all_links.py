@@ -5,7 +5,7 @@ from requests import get
 def getpage(page):
 	return get(page).text
 
-page = getpage('http://yandex.ru')
+page = 'http://yandex.ru'
 # page = 'Not "good" at all'
 # <a href="http://yandex.ru">asdhgj</a>
 
@@ -58,9 +58,8 @@ def crawl_web(seed):
 		page = to_crawl.pop()
 		if page not in crawled:
 			#proccess page
-			to_crawl = union(to_crawl, get_all_links(page))
+			to_crawl = union(to_crawl, get_all_links(getpage(page)))
 			crawled.append(page)
-
 	return crawled
 
 
