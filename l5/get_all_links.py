@@ -3,7 +3,10 @@
 from requests import get
 
 def getpage(page):
-	return get(page).text
+	try:
+		return get(page).text
+	except:
+		return ""
 
 page = 'http://yandex.ru'
 # page = 'Not "good" at all'
@@ -60,6 +63,7 @@ def crawl_web(seed):
 			#proccess page
 			to_crawl = union(to_crawl, get_all_links(getpage(page)))
 			crawled.append(page)
+
 	return crawled
 
 
