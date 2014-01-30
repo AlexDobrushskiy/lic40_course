@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from requests import get
+from index import add_page_to_index
+
 
 def getpage(page):
 	try:
@@ -56,16 +58,21 @@ def crawl_web(seed):
 	to_crawl = [seed]
 	# списиок уже посещенный ссылок
 	crawled = []	
+	index = []
 	# while to_crawl is not empty
 	while to_crawl: 
 		page = to_crawl.pop()
 		if page not in crawled:
 			#proccess page
+			# text of page = getpage(page)
+			add_page_to_index(index, page, getpage(page))
 			to_crawl = union(to_crawl, get_all_links(getpage(page)))
 			crawled.append(page)
 
 	return crawled
 
+page #'http://wikipedia.org/'
+getpage(page) # <html> .. <body> ... </>
 
 
 links = crawl_web(page)
