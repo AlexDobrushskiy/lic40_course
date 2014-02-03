@@ -58,7 +58,7 @@ def crawl_web(seed):
 	to_crawl = [seed]
 	# списиок уже посещенный ссылок
 	crawled = []	
-	index = []
+	index = {}
 	# while to_crawl is not empty
 	while to_crawl: 
 		page = to_crawl.pop()
@@ -69,7 +69,7 @@ def crawl_web(seed):
 			to_crawl = union(to_crawl, get_all_links(getpage(page)))
 			crawled.append(page)
 
-	return crawled
+	return index
 
 page #'http://wikipedia.org/'
 getpage(page) # <html> .. <body> ... </>

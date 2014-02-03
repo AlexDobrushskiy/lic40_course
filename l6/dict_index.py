@@ -8,14 +8,13 @@ from requests import get
 def get_page(page):
 	return get(page).text
 
-index = []
+index = {}
 def add_to_index(index, word, url):
-	for i in index:
-		if word == i[0]:
-			if url not in i[1]:
-				i[1].append(url)
-			return
-	index.append([word,[url]])
+	if word not in index:
+		index [word] = [url] 
+	else:
+		index[word].append(url)
+
 
 add_to_index(index,'random','http:/vk.com')
 add_to_index(index,'login','http:/vk.com')
@@ -24,10 +23,7 @@ add_to_index(index,'login','http:/store.steampowered.com')
 
 
 def index_lookup(index, keyword):
-	for i in index:
-		if keyword==i[0]:
-			return i[1]
-	return []
+	return index[keyword]
 
 
 print index_lookup(index, 'login')	
