@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from requests import get
-from index import add_page_to_index
+from dict_index import add_page_to_index
 
 
 def getpage(page):
@@ -10,7 +10,7 @@ def getpage(page):
 	except:
 		return ""
 
-page = 'http://yandex.ru'
+page = 'http://ru.wikipedia.org/'
 # page = 'Not "good" at all'
 # <a href="http://yandex.ru">asdhgj</a>
 
@@ -59,20 +59,21 @@ def crawl_web(seed):
 	# списиок уже посещенный ссылок
 	crawled = []	
 	index = {}
+	graph = {}
 	# while to_crawl is not empty
-	while to_crawl: 
+	while len(crawled)<10: 
 		page = to_crawl.pop()
 		if page not in crawled:
 			#proccess page
-			# text of page = getpage(page)
+			graph [page] = get_all_links (getpage (page))
 			add_page_to_index(index, page, getpage(page))
-			to_crawl = union(to_crawl, get_all_links(getpage(page)))
+			to_crawl = union(to_crawl, graph [page])
 			crawled.append(page)
 
-	return index
+	return index, graph
 
-page #'http://wikipedia.org/'
-getpage(page) # <html> .. <body> ... </>
+# page #'http://wikipedia.org/'
+# getpage(page) # <html> .. <body> ... </>
 
 
 links = crawl_web(page)
