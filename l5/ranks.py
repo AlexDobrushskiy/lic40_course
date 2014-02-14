@@ -8,6 +8,7 @@ def revers_graph (graph):
 				if url == page:
 					inlinks.append (j)
 		reversed [page] = inlinks
+	return reversed
 
 
 def compute_ranks(graph):

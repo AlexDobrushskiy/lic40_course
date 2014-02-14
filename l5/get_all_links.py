@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from ranks import compute_ranks
 from requests import get
 from dict_index import add_page_to_index
 
@@ -60,6 +61,7 @@ def crawl_web(seed):
 	crawled = []	
 	index = {}
 	graph = {}
+
 	# while to_crawl is not empty
 	while to_crawl: 
 		page = to_crawl.pop()
@@ -73,7 +75,7 @@ def crawl_web(seed):
 	return index, graph
 
 # page #'http://wikipedia.org/'
-# getpage(page) # <html> .. <body> ... </>
+# getpage(page) # <html> .. <body> ... </
 
 
 links, graph = crawl_web(page)
@@ -82,4 +84,18 @@ print links
 
 print graph
 #[<link1>, <link2>, ..]
+# print compute_ranks(graph)
+ranks=compute_ranks(graph)
+
+def f(x):
+	return -ranks[x]
+
+def search(word,index,ranks):
+	if word not in index:
+		return None
+	else:
+		result= index[word]
+	result.sort(key= f)
+	return result
+print search("Dogs",links,compute_ranks(graph))
 
