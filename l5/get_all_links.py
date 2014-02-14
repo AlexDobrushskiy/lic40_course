@@ -10,7 +10,7 @@ def getpage(page):
 	except:
 		return ""
 
-page = 'http://ru.wikipedia.org/'
+page = 'http://127.0.0.1/cat.html'
 # page = 'Not "good" at all'
 # <a href="http://yandex.ru">asdhgj</a>
 
@@ -61,7 +61,7 @@ def crawl_web(seed):
 	index = {}
 	graph = {}
 	# while to_crawl is not empty
-	while len(crawled)<10: 
+	while to_crawl: 
 		page = to_crawl.pop()
 		if page not in crawled:
 			#proccess page
@@ -76,8 +76,10 @@ def crawl_web(seed):
 # getpage(page) # <html> .. <body> ... </>
 
 
-links = crawl_web(page)
+links, graph = crawl_web(page)
 
 print links
+
+print graph
 #[<link1>, <link2>, ..]
 
