@@ -97,5 +97,5 @@ def search(word,index,ranks):
 		result= index[word]
 	result.sort(key= f)
 	return result
-print search("Dogs",links,compute_ranks(graph))
+print search("is",links,ranks)
 
